@@ -1,26 +1,40 @@
+*{
+    box-sizing: border-box;
+}
+
 #slider {
     display: grid;
     grid-template-columns: 10% 1fr 10%;
-    background-color: yellow;
+    width: 100%;
 }
 
 
 .left, .right{
+    background-color: yellow;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 128px;
-
+    justify-self: center;
+    font-size: 40px;
+    cursor: pointer;
     color: blue;
     font-weight: 900;
+    width: 100%;
+    height: 100%;
 }
 
 .slides-img_container{
     aspect-ratio: 1 / 1;
-    display: flex;
     overflow: hidden;
 }
+
+.content{
+    display: flex;
+    height: 100%;
+    width: 100%;
+    transition: 2s;
+}
+
  img{
-     width: 100%;
-     transform: translateX(-100%);
+
 }
