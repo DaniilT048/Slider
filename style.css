@@ -5,8 +5,8 @@
 #slider {
     display: grid;
     grid-template-columns: 10% 1fr 10%;
-    width: 100%;
     background: linear-gradient(to bottom right, blue, yellow);
+    width: 800px;
 }
 
 
@@ -40,9 +40,8 @@
     background-color: blue;
     color: white;
     font-weight: bold;
-    border-radius: 50%;
+    border-radius: 30px;
     cursor: pointer;
-    border : 5px solid black
 }
 
 .slider-navigation{
