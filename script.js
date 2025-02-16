@@ -19,9 +19,6 @@ stopSlider.addEventListener('click', stopAutoSlides);
 
 function onLeft() {
  currentSlide--;
-    if (currentSlide < 0) {
-        currentSlide = currentSlide - imageWidth;
-    }
 
     contentImg.style.transform = `translate(-${currentSlide * imageWidth}px)`;
 
@@ -29,9 +26,6 @@ function onLeft() {
 
 function onRight() {
     currentSlide++;
-    if (currentSlide === imageWidth) {
-        currentSlide = 0;
-    }
     contentImg.style.transform = `translate(-${currentSlide * imageWidth}px)`;
 }
 
@@ -48,6 +42,5 @@ function startAutoSlides () {
 function stopAutoSlides () {
     clearInterval(intervalId)
     intervalId = null;
-    currentSlide = --imageWidth;
 }
 
