@@ -1,7 +1,7 @@
 let currentSlide = 0
 let imageWidth;
-const left = document.getElementsByClassName("left");
-const right = document.getElementsByClassName("right");
+const left = document.querySelector(".left");
+const right = document.querySelector(".right");
 
 const slider = document.getElementById("slider");
 const firstSlide = document.querySelector("#slider img");
