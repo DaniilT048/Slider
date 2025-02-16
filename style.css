@@ -1,6 +1,7 @@
 #slider {
     display: grid;
     grid-template-columns: 10% 1fr 10%;
+    background-color: yellow;
 }
 
 
@@ -8,13 +9,18 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    font-size: 128px;
+
+    color: blue;
+    font-weight: 900;
 }
 
 .slides-img_container{
     aspect-ratio: 1 / 1;
-    width: 100%;
     display: flex;
     overflow: hidden;
-
 }
-
+ img{
+     width: 100%;
+     transform: translateX(-100%);
+}
