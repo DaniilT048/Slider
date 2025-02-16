@@ -19,7 +19,6 @@ stopSlider.addEventListener('click', stopAutoSlides);
 
 function onLeft() {
  currentSlide--;
-
     contentImg.style.transform = `translate(-${currentSlide * imageWidth}px)`;
 
 }

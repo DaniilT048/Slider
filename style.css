@@ -6,18 +6,19 @@
     display: grid;
     grid-template-columns: 10% 1fr 10%;
     width: 100%;
+    background: linear-gradient(to bottom right, blue, yellow);
 }
 
 
 .left, .right{
-    background-color: yellow;
+
     display: flex;
     justify-content: center;
     align-items: center;
     justify-self: center;
     font-size: 40px;
     cursor: pointer;
-    color: blue;
+    color: black;
     font-weight: 900;
     width: 100%;
     height: 100%;
@@ -35,6 +36,29 @@
     transition: 2s;
 }
 
- img{
+#start-sliding, #stop-sliding{
+    background-color: blue;
+    color: white;
+    font-weight: bold;
+    border-radius: 50%;
+    cursor: pointer;
+    border : 5px solid black
+}
 
+.slider-navigation{
+    display: flex;
+    justify-content: center;
+}
+
+.slider-navigation li{
+    padding: 5px;
+    margin-right: 10px;
+    cursor: pointer;
+    border-radius: 50%;
+    border: 5px solid blue;
+    list-style: none;
+}
+
+li:hover {
+    background-color: yellow;
 }
