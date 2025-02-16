@@ -1,14 +1,20 @@
 #slider {
     display: grid;
-    grid-template-rows: repeat(2, 1fr);
-    width: 500px;
-    height: 500px;
+    grid-template-columns: 10% 1fr 10%;
 }
 
-.prev .next {
+
+.left, .right{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .slides-img_container{
+    aspect-ratio: 1 / 1;
+    width: 100%;
     display: flex;
     overflow: hidden;
+
 }
+
