@@ -19,13 +19,13 @@ stopSlider.addEventListener('click', stopAutoSlides);
 
 function onLeft() {
  currentSlide--;
-    contentImg.style.transform = `translate(-${currentSlide * imageWidth}px)`;
+    contentImg.style.transform = `translate(-${currentSlide * firstSlide.offsetWidth}px)`; //Да. Так и вышло. Надо чтоб оно считало каждый раз размер. В таком случае imgWidth вроде даже и не нужен. Он всё ломает
 
 }
 
 function onRight() {
     currentSlide++;
-    contentImg.style.transform = `translate(-${currentSlide * imageWidth}px)`;
+    contentImg.style.transform = `translate(-${currentSlide * firstSlide.offsetWidth}px)`;
 }
 
 let intervalId = null
