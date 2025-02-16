@@ -1,5 +1,6 @@
 let currentSlide = 0;
 let imageWidth;
+
 const left = document.querySelector(".left");
 const right = document.querySelector(".right");
 
@@ -18,14 +19,19 @@ stopSlider.addEventListener('click', stopAutoSlides);
 
 function onLeft() {
  currentSlide--;
+    if (currentSlide < 0) {
+        currentSlide = currentSlide - imageWidth;
+    }
 
-
-    contentImg.style.transform = `translate(${currentSlide * imageWidth}px)`;
+    contentImg.style.transform = `translate(-${currentSlide * imageWidth}px)`;
 
 }
 
 function onRight() {
     currentSlide++;
+    if (currentSlide === imageWidth) {
+        currentSlide = 0;
+    }
     contentImg.style.transform = `translate(-${currentSlide * imageWidth}px)`;
 }
 
