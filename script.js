@@ -41,7 +41,7 @@ function onLeft() {
         currentSlide = images.length -1;
     }
     contentImg.style.transform = `translate(-${currentSlide * imgSlide.offsetWidth}px)`; //Да. Так и вышло. Надо чтоб оно считало каждый раз размер. В таком случае imgWidth вроде даже и не нужен. Он всё ломает
-
+    activeDot()
 }
 
 function onRight() {
@@ -50,6 +50,7 @@ function onRight() {
         currentSlide = 0;
     }
     contentImg.style.transform = `translate(-${currentSlide * imgSlide.offsetWidth}px)`;
+    activeDot()
 }
 
 
@@ -68,10 +69,17 @@ function onDotClick(event) {
     }
   currentSlide = event.target.dataset.dot;
   contentImg.style.transform = `translate(-${currentSlide * imgSlide.offsetWidth}px)`;
-
+    activeDot()
 }
 
-// console.log(onDotClick())
+function activeDot() {
+    const activeClass = document.querySelector("#slider .active");
+    if (activeClass) {
+        activeClass.classList.remove("active");
+    }
+    document.querySelector(`#slider div[data-dot='${currentSlide}']`)
+    .classList.add("active");
+}
 
 let intervalId = null
 
