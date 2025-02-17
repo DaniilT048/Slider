@@ -49,15 +49,14 @@
     justify-content: center;
 }
 
-.slider-navigation li{
+.dots{
     padding: 5px;
     margin-right: 10px;
     cursor: pointer;
     border-radius: 50%;
     border: 5px solid blue;
-    list-style: none;
 }
 
-li:hover {
+.dots:hover {
     background-color: yellow;
 }
