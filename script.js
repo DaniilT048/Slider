@@ -9,7 +9,7 @@ const left = document.querySelector(".left");
 const right = document.querySelector(".right");
 
 
-const contentImg = document.querySelector(".content");
+const contentImg = document.querySelector("#slider .content");
 generateImage()
 generateDots()
 const imgSlide = document.querySelector("#slider img");
@@ -17,10 +17,11 @@ const imgSlide = document.querySelector("#slider img");
 const startSlider = document.querySelector("#start-sliding");
 const stopSlider = document.querySelector("#stop-sliding");
 
-const dots = document.querySelector(".dots");
+const slideButtons = document.querySelector("#slider .slider-navigation");
 
 left.addEventListener("click", onLeft);
 right.addEventListener("click", onRight);
+slideButtons.addEventListener("click", onDotClick)
 
 startSlider.addEventListener('click', startAutoSlides);
 stopSlider.addEventListener('click', stopAutoSlides);
@@ -31,15 +32,6 @@ function generateImage() {
         imgHtml += `<img src=${image} alt="">`;
     })
     contentImg.innerHTML = imgHtml;
-}
-
-function generateDots() {
-    let resultHtml = '';
-    images.forEach((image, index) => {
-        const activeClass = index === 0 ? "active" : "";
-        resultHtml += `<div class="dots ${activeClass}" data-dot="${index}"></div>`
-    })
-    document.querySelector('#slider .slider-navigation').innerHTML = resultHtml;
 }
 
 
@@ -59,6 +51,27 @@ function onRight() {
     }
     contentImg.style.transform = `translate(-${currentSlide * imgSlide.offsetWidth}px)`;
 }
+
+
+function generateDots() {
+    let resultHtml = '';
+    images.forEach((image, index) => {
+        const activeClass = index === 0 ? "active" : "";
+        resultHtml += `<div class="dots ${activeClass}" data-dot="${index}"></div>`
+    })
+    document.querySelector('#slider .slider-navigation').innerHTML = resultHtml;
+}
+
+function onDotClick(event) {
+    if (!event.target.classList.contains("dots")) {
+        return;
+    }
+  currentSlide = event.target.dataset.dot;
+  contentImg.style.transform = `translate(-${currentSlide * imgSlide.offsetWidth}px)`;
+
+}
+
+// console.log(onDotClick())
 
 let intervalId = null
 
