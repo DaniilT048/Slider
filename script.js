@@ -11,6 +11,7 @@ const right = document.querySelector(".right");
 
 const contentImg = document.querySelector(".content");
 generateImage()
+generateDots()
 const imgSlide = document.querySelector("#slider img");
 
 const startSlider = document.querySelector("#start-sliding");
@@ -30,6 +31,15 @@ function generateImage() {
         imgHtml += `<img src=${image} alt="">`;
     })
     contentImg.innerHTML = imgHtml;
+}
+
+function generateDots() {
+    let resultHtml = '';
+    images.forEach((image, index) => {
+        const activeClass = index === 0 ? "active" : "";
+        resultHtml += `<div class="dots ${activeClass}" data-dot="${index}"></div>`
+    })
+    document.querySelector('#slider .slider-navigation').innerHTML = resultHtml;
 }
 
 
@@ -65,7 +75,4 @@ function stopAutoSlides () {
     intervalId = null;
 }
 
-function dotsNavigation (){
-
-}
 
