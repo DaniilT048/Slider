@@ -25,14 +25,6 @@ slideNavigation.addEventListener("click", onDotClick)
 startSlider.addEventListener('click', startAutoSlides);
 stopSlider.addEventListener('click', stopAutoSlides);
 
-contentImg.addEventListener('touchstart', startTouch);
-contentImg.addEventListener('touchmove', moveTouch);
-contentImg.addEventListener('touchend', endTouch);
-
-contentImg.addEventListener('mousedown', startTouch);
-contentImg.addEventListener('mousemove', moveTouch);
-contentImg.addEventListener('mouseup', endTouch);
-contentImg.addEventListener('mouseleave', endTouch);
 
 function generateImage() {
     let imgHtml = '';
@@ -115,24 +107,16 @@ window.addEventListener('keydown', (event) => {
     }
 })
 
-// const tolerance = 100;
-// let touchStartX = 0;
-// let touchEndX = 0;
 
-// contentImg.addEventListener('touchstart', (event) => {
-//     touchStartX = event.touches[0].clientX;
-// }, {passive: false});
+// contentImg.addEventListener('touchstart', startTouch);
+// contentImg.addEventListener('touchmove', moveTouch);
+// contentImg.addEventListener('touchend', endTouch);
 //
-// contentImg.addEventListener('touchend', (event) => {
-//     touchEndX = event.changedTouches[0].clientX;
-//     if (touchEndX >= tolerance) {
-//        onLeft();
-//     }else if (touchStartX - touchEndX >= tolerance){
-//         onRight();
-//     }else {
-//         console.log('ignore')
-//     }
-// });
+// contentImg.addEventListener('mousedown', startTouch);
+// contentImg.addEventListener('mousemove', moveTouch);
+// contentImg.addEventListener('mouseup', endTouch);
+// contentImg.addEventListener('mouseleave', endTouch);
+//
 // let startX = 0;
 // let currentTranslate = 0;
 // let prevTranslate = 0;
