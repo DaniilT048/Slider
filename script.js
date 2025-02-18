@@ -91,9 +91,16 @@ function startAutoSlides () {
     }
 }
 
+
 function stopAutoSlides () {
     clearInterval(intervalId)
     intervalId = null;
 }
 
 
+window.addEventListener('keydown', (event) => {
+    switch (event.key) {
+    case 'ArrowRight': onRight(); break;
+    case 'ArrowLeft': onLeft();
+    }
+})
