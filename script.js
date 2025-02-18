@@ -1,30 +1,38 @@
-let currentSlide = 0;
+
 const images = [
     "img/slide-1.jpg",
     "img/slide-2.jpg",
     "img/slide-3.jpg",
-]
+];
+let intervalId = null;
+let currentSlide = 0;
 
-const left = document.querySelector(".left");
-const right = document.querySelector(".right");
-
-
+const left = document.querySelector("#slider .left");
+const right = document.querySelector("#slider .right");
 const contentImg = document.querySelector("#slider .content");
 generateImage()
 generateDots()
 const imgSlide = document.querySelector("#slider img");
-
-const startSlider = document.querySelector("#start-sliding");
-const stopSlider = document.querySelector("#stop-sliding");
-
-const slideButtons = document.querySelector("#slider .slider-navigation");
+const startSlider = document.querySelector("#slider #start-sliding");
+const stopSlider = document.querySelector("#slider #stop-sliding");
+const slideNavigation = document.querySelector("#slider .slider-navigation");
 
 left.addEventListener("click", onLeft);
 right.addEventListener("click", onRight);
-slideButtons.addEventListener("click", onDotClick)
+
+slideNavigation.addEventListener("click", onDotClick)
 
 startSlider.addEventListener('click', startAutoSlides);
 stopSlider.addEventListener('click', stopAutoSlides);
+
+contentImg.addEventListener('touchstart', startTouch);
+contentImg.addEventListener('touchmove', moveTouch);
+contentImg.addEventListener('touchend', endTouch);
+
+contentImg.addEventListener('mousedown', startTouch);
+contentImg.addEventListener('mousemove', moveTouch);
+contentImg.addEventListener('mouseup', endTouch);
+contentImg.addEventListener('mouseleave', endTouch);
 
 function generateImage() {
     let imgHtml = '';
@@ -40,9 +48,10 @@ function onLeft() {
     if(currentSlide < 0){
         currentSlide = images.length -1;
     }
-    contentImg.style.transform = `translate(-${currentSlide * imgSlide.offsetWidth}px)`; //Да. Так и вышло. Надо чтоб оно считало каждый раз размер. В таком случае imgWidth вроде даже и не нужен. Он всё ломает
+    contentImg.style.transform = `translate(-${currentSlide * imgSlide.offsetWidth}px)`;
     activeDot()
 }
+
 
 function onRight() {
     currentSlide++;
@@ -63,6 +72,7 @@ function generateDots() {
     document.querySelector('#slider .slider-navigation').innerHTML = resultHtml;
 }
 
+
 function onDotClick(event) {
     if (!event.target.classList.contains("dots")) {
         return;
@@ -71,6 +81,7 @@ function onDotClick(event) {
   contentImg.style.transform = `translate(-${currentSlide * imgSlide.offsetWidth}px)`;
     activeDot()
 }
+
 
 function activeDot() {
     const activeClass = document.querySelector("#slider .active");
@@ -81,7 +92,6 @@ function activeDot() {
     .classList.add("active");
 }
 
-let intervalId = null
 
 function startAutoSlides () {
     if (!intervalId) {
@@ -104,3 +114,57 @@ window.addEventListener('keydown', (event) => {
     case 'ArrowLeft': onLeft();
     }
 })
+
+// const tolerance = 100;
+// let touchStartX = 0;
+// let touchEndX = 0;
+
+// contentImg.addEventListener('touchstart', (event) => {
+//     touchStartX = event.touches[0].clientX;
+// }, {passive: false});
+//
+// contentImg.addEventListener('touchend', (event) => {
+//     touchEndX = event.changedTouches[0].clientX;
+//     if (touchEndX >= tolerance) {
+//        onLeft();
+//     }else if (touchStartX - touchEndX >= tolerance){
+//         onRight();
+//     }else {
+//         console.log('ignore')
+//     }
+// });
+// let startX = 0;
+// let currentTranslate = 0;
+// let prevTranslate = 0;
+// let slideWidth = contentImg.clientWidth / images.length;
+//
+// function startTouch(event) {
+//     startX = event.touches ? event.touches[0].clientX : event.clientX;
+//     contentImg.style.transition = 'none';
+// }
+//
+// function moveTouch(event) {
+//     if (!startX) return;
+//     let currentX = event.touches ? event.touches[0].clientX : event.clientX;
+//     let diff = currentX - startX;
+//     currentTranslate = prevTranslate + diff;
+//     contentImg.style.transform = `translateX(${currentTranslate}px)`;
+// }
+//
+// function endTouch() {
+//     if (!startX) return;
+//     let movedBy = currentTranslate - prevTranslate;
+//
+//     if (movedBy < -50 && currentSlide < images.length - 1) {
+//         currentSlide++;
+//     } else if (movedBy > 50 && currentSlide > 0) {
+//         currentSlide--;
+//     }
+//
+//     prevTranslate = -currentSlide * slideWidth;
+//     contentImg.style.transition = 'transform 0.3s ease-in-out';
+//     contentImg.style.transform = `translateX(${prevTranslate}px)`;
+//
+//     activeDot();
+//     startX = 0;
+// }
