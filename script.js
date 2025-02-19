@@ -6,6 +6,10 @@ const images = [
 ];
 let intervalId = null;
 let currentSlide = 0;
+const swipe = 100;
+let startTouchX = 0;
+let endTouchX = 0;
+
 
 const left = document.querySelector("#slider .left");
 const right = document.querySelector("#slider .right");
@@ -19,11 +23,43 @@ const slideNavigation = document.querySelector("#slider .slider-navigation");
 
 left.addEventListener("click", onLeft);
 right.addEventListener("click", onRight);
-
 slideNavigation.addEventListener("click", onDotClick)
-
 startSlider.addEventListener('click', startAutoSlides);
 stopSlider.addEventListener('click', stopAutoSlides);
+
+contentImg.addEventListener('touchstart', (event) => {
+    startTouchX = event.touches[0].clientX;
+}, {passive: false});
+
+contentImg.addEventListener('touchend', (event) => {
+    endTouchX = event.changedTouches[0].clientX;
+    slideSwipe();
+});
+
+contentImg.addEventListener('mousedown', (event) => {
+    startTouchX = event.clientX;
+    console.log(event.clientX);
+})
+
+contentImg.addEventListener('mouseup', (event) => {
+    endTouchX = event.clientX;
+    console.log(event.clientX);
+    slideSwipe();
+})
+
+document.querySelectorAll('img').forEach(img => {
+    img.ondragstart = () => false;    // block dragging of img
+})
+
+
+
+window.addEventListener('keydown', (event) => {
+    switch (event.key) {
+        case 'ArrowRight': onRight(); break;
+        case 'ArrowLeft': onLeft();
+    }
+})
+
 
 
 function generateImage() {
@@ -100,55 +136,10 @@ function stopAutoSlides () {
 }
 
 
-window.addEventListener('keydown', (event) => {
-    switch (event.key) {
-    case 'ArrowRight': onRight(); break;
-    case 'ArrowLeft': onLeft();
+function slideSwipe(){
+    if (endTouchX - startTouchX >= swipe ) {
+        onLeft()
+    }else if (startTouchX - endTouchX >= swipe) {
+        onRight()
     }
-})
-
-
-contentImg.addEventListener('touchstart', startTouch);
-contentImg.addEventListener('touchmove', moveTouch);
-contentImg.addEventListener('touchend', endTouch);
-
-contentImg.addEventListener('mousedown', startTouch);
-contentImg.addEventListener('mousemove', moveTouch);
-contentImg.addEventListener('mouseup', endTouch);
-contentImg.addEventListener('mouseleave', endTouch);
-
-let startX = 0;
-let currentTranslate = 0;
-let prevTranslate = 0;
-let slideWidth = contentImg.clientWidth / images.length;
-
-function startTouch(event) {
-    startX = event.touches ? event.touches[0].clientX : event.clientX;
-    contentImg.style.transition = 'none';
-}
-
-function moveTouch(event) {
-    if (!startX) return;
-    let currentX = event.touches ? event.touches[0].clientX : event.clientX;
-    let diff = currentX - startX;
-    currentTranslate = prevTranslate + diff;
-    contentImg.style.transform = `translateX(${currentTranslate}px)`;
-}
-
-function endTouch() {
-    if (!startX) return;
-    let movedBy = currentTranslate - prevTranslate;
-
-    if (movedBy < -50 && currentSlide < images.length - 1) {
-        currentSlide++;
-    } else if (movedBy > 50 && currentSlide > 0) {
-        currentSlide--;
-    }
-
-    prevTranslate = -currentSlide * slideWidth;
-    contentImg.style.transition = 'transform 0.3s ease-in-out';
-    contentImg.style.transform = `translateX(${prevTranslate}px)`;
-
-    activeDot();
-    startX = 0;
 }
