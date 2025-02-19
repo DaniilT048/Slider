@@ -108,47 +108,47 @@ window.addEventListener('keydown', (event) => {
 })
 
 
-// contentImg.addEventListener('touchstart', startTouch);
-// contentImg.addEventListener('touchmove', moveTouch);
-// contentImg.addEventListener('touchend', endTouch);
-//
-// contentImg.addEventListener('mousedown', startTouch);
-// contentImg.addEventListener('mousemove', moveTouch);
-// contentImg.addEventListener('mouseup', endTouch);
-// contentImg.addEventListener('mouseleave', endTouch);
-//
-// let startX = 0;
-// let currentTranslate = 0;
-// let prevTranslate = 0;
-// let slideWidth = contentImg.clientWidth / images.length;
-//
-// function startTouch(event) {
-//     startX = event.touches ? event.touches[0].clientX : event.clientX;
-//     contentImg.style.transition = 'none';
-// }
-//
-// function moveTouch(event) {
-//     if (!startX) return;
-//     let currentX = event.touches ? event.touches[0].clientX : event.clientX;
-//     let diff = currentX - startX;
-//     currentTranslate = prevTranslate + diff;
-//     contentImg.style.transform = `translateX(${currentTranslate}px)`;
-// }
-//
-// function endTouch() {
-//     if (!startX) return;
-//     let movedBy = currentTranslate - prevTranslate;
-//
-//     if (movedBy < -50 && currentSlide < images.length - 1) {
-//         currentSlide++;
-//     } else if (movedBy > 50 && currentSlide > 0) {
-//         currentSlide--;
-//     }
-//
-//     prevTranslate = -currentSlide * slideWidth;
-//     contentImg.style.transition = 'transform 0.3s ease-in-out';
-//     contentImg.style.transform = `translateX(${prevTranslate}px)`;
-//
-//     activeDot();
-//     startX = 0;
-// }
+contentImg.addEventListener('touchstart', startTouch);
+contentImg.addEventListener('touchmove', moveTouch);
+contentImg.addEventListener('touchend', endTouch);
+
+contentImg.addEventListener('mousedown', startTouch);
+contentImg.addEventListener('mousemove', moveTouch);
+contentImg.addEventListener('mouseup', endTouch);
+contentImg.addEventListener('mouseleave', endTouch);
+
+let startX = 0;
+let currentTranslate = 0;
+let prevTranslate = 0;
+let slideWidth = contentImg.clientWidth / images.length;
+
+function startTouch(event) {
+    startX = event.touches ? event.touches[0].clientX : event.clientX;
+    contentImg.style.transition = 'none';
+}
+
+function moveTouch(event) {
+    if (!startX) return;
+    let currentX = event.touches ? event.touches[0].clientX : event.clientX;
+    let diff = currentX - startX;
+    currentTranslate = prevTranslate + diff;
+    contentImg.style.transform = `translateX(${currentTranslate}px)`;
+}
+
+function endTouch() {
+    if (!startX) return;
+    let movedBy = currentTranslate - prevTranslate;
+
+    if (movedBy < -50 && currentSlide < images.length - 1) {
+        currentSlide++;
+    } else if (movedBy > 50 && currentSlide > 0) {
+        currentSlide--;
+    }
+
+    prevTranslate = -currentSlide * slideWidth;
+    contentImg.style.transition = 'transform 0.3s ease-in-out';
+    contentImg.style.transform = `translateX(${prevTranslate}px)`;
+
+    activeDot();
+    startX = 0;
+}
