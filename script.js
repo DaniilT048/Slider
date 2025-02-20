@@ -6,9 +6,10 @@ const images = [
 ];
 let intervalId = null;
 let currentSlide = 0;
-const swipe = 100;
+const minDistanceForSwipe = 100;
 let startTouchX = 0;
 let endTouchX = 0;
+let sliderTimer = 5;
 
 
 const left = document.querySelector("#slider .left");
@@ -17,8 +18,8 @@ const contentImg = document.querySelector("#slider .content");
 generateImage()
 generateDots()
 const imgSlide = document.querySelector("#slider img");
-const startSlider = document.querySelector("#slider #start-sliding");
-const stopSlider = document.querySelector("#slider #stop-sliding");
+const startSlider = document.querySelector("#slider .start-sliding");
+const stopSlider = document.querySelector("#slider .stop-sliding");
 const slideNavigation = document.querySelector("#slider .slider-navigation");
 
 left.addEventListener("click", onLeft);
@@ -38,19 +39,16 @@ contentImg.addEventListener('touchend', (event) => {
 
 contentImg.addEventListener('mousedown', (event) => {
     startTouchX = event.clientX;
-    console.log(event.clientX);
 })
 
 contentImg.addEventListener('mouseup', (event) => {
     endTouchX = event.clientX;
-    console.log(event.clientX);
     slideSwipe();
 })
 
 document.querySelectorAll('img').forEach(img => {
     img.ondragstart = () => false;    // block dragging of img
 })
-
 
 
 window.addEventListener('keydown', (event) => {
@@ -125,7 +123,7 @@ function startAutoSlides () {
     if (!intervalId) {
         intervalId = setInterval(() => {
             onRight();
-        }, 2000)
+        }, sliderTimer * 1000)
     }
 }
 
@@ -137,9 +135,9 @@ function stopAutoSlides () {
 
 
 function slideSwipe(){
-    if (endTouchX - startTouchX >= swipe ) {
+    if (endTouchX - startTouchX >= minDistanceForSwipe ) {
         onLeft()
-    }else if (startTouchX - endTouchX >= swipe) {
+    }else if (startTouchX - endTouchX >= minDistanceForSwipe) {
         onRight()
     }
 }
