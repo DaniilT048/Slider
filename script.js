@@ -9,7 +9,7 @@ let currentSlide = 0;
 const minDistanceForSwipe = 100;
 let startTouchX = 0;
 let endTouchX = 0;
-let sliderTimer = 5;
+let sliderTimer = 2;
 
 
 const left = document.querySelector("#slider .left");
@@ -18,15 +18,14 @@ const contentImg = document.querySelector("#slider .content");
 generateImage()
 generateDots()
 const imgSlide = document.querySelector("#slider img");
-const startSlider = document.querySelector("#slider .start-sliding");
-const stopSlider = document.querySelector("#slider .stop-sliding");
+const autoSlidesButton = document.querySelector("#slider .auto-sliding");
 const slideNavigation = document.querySelector("#slider .slider-navigation");
 
 left.addEventListener("click", onLeft);
 right.addEventListener("click", onRight);
-slideNavigation.addEventListener("click", onDotClick)
-startSlider.addEventListener('click', startAutoSlides);
-stopSlider.addEventListener('click', stopAutoSlides);
+slideNavigation.addEventListener("click", onDotClick);
+autoSlidesButton.addEventListener('click', startStopAutoSlides);
+autoSlidesButton.innerHTML = `<div class="sliding">&#9658;</div>`;
 
 contentImg.addEventListener('touchstart', (event) => {
     startTouchX = event.touches[0].clientX;
@@ -57,7 +56,6 @@ window.addEventListener('keydown', (event) => {
         case 'ArrowLeft': onLeft();
     }
 })
-
 
 
 function generateImage() {
@@ -119,18 +117,17 @@ function activeDot() {
 }
 
 
-function startAutoSlides () {
+function startStopAutoSlides () {
     if (!intervalId) {
         intervalId = setInterval(() => {
             onRight();
-        }, sliderTimer * 1000)
+        }, sliderTimer * 1000);
+        autoSlidesButton.innerHTML = `<div class="sliding">&#9632;</div>`;
+    }else{
+        clearInterval(intervalId)
+        intervalId = null;
+        autoSlidesButton.innerHTML = `<div class="sliding">&#9658;</div>`;
     }
-}
-
-
-function stopAutoSlides () {
-    clearInterval(intervalId)
-    intervalId = null;
 }
 
 
